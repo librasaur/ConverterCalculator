@@ -1,17 +1,27 @@
 #pragma once
+
 namespace ConverterCalculator
 {
+	using namespace System;
+
 	ref class CalculatorLogic
 	{
 	public:
-		CalculatorLogic() {};
+		int StringToInt(String^ stringToConvert);
 
-		float MultiplyNumbers(int num1, int num2);
-		float DividNumbers(int num1, int num2);
-		float AddNumbers(int num1, int num2);
-		float SubtractNumbers(int num1, int num2);
+		String^ InfixToPostfix(String^ stringExpression);
+		int IsRightAssociative(char op);
+		int GetOperatorPrecedence(char op);
+		bool HasHigherPrecedence(char firstOp, char secondOp);
+		bool HasEqualPrecedence(char firstOp, char secondOp);
 
-	protected:
-		~CalculatorLogic() {};
+		//float CalculateResult(String^ firstNum, String^ secondNum, char operation);
+
+		int MultiplyNumbers(int firstNum, int secondNum);
+		int DivideNumbers(int firstNum, int secondNum);
+		int AddNumbers(int firstNum, int secondNum);
+		int SubtractNumbers(int firstNum, int secondNum);
+
+		float accumulator = 0;
 	};
 }

@@ -1,10 +1,12 @@
 #include "Calculator.h"
 #include "CalculatorLogic.h"
+#include <iostream>
 #include <string>
 
 using namespace ConverterCalculator;
 using namespace System;
 using namespace System::Windows::Forms;
+
 
 int main(array<System::String ^> ^args)
 {
@@ -19,16 +21,10 @@ int main(array<System::String ^> ^args)
 
 void Calculator::UpdateOutput(String^ textToAdd)
 {
-	if (lblResult->Text == "0")
-		lblResult->Text = textToAdd;
+	if (lblOutput->Text == "0")
+		lblOutput->Text = textToAdd;
 	else
-		lblResult->Text += textToAdd;
-}
-
-
-void Calculator::CalculateResult(String^ stringExpression)
-{
-	//CalculatorLogic maths = CalculatorLogic();
+		lblOutput->Text += textToAdd;
 }
 
 
@@ -81,40 +77,85 @@ void Calculator::btnNine_Click(System::Object^ sender, System::EventArgs^ e)
 
 void Calculator::btnZero_Click(System::Object^ sender, System::EventArgs^ e)
 {
-	if (lblResult->Text != "0")
-		lblResult->Text += "0";
+	if (lblOutput->Text != "0" && finishedCalculation)
+		lblOutput->Text += "0";
 }
 
 void Calculator::btnMultiply_Click(System::Object^ sender, System::EventArgs^ e)
 {
-	if (lblResult->Text != "0")
-		lblResult->Text += "x";
+	if (lblOutput->Text != "0" && finishedCalculation)
+		lblOutput->Text += "x";
 }
 
 void Calculator::btnDivide_Click(System::Object^ sender, System::EventArgs^ e)
 {
-	if (lblResult->Text != "0")
-		lblResult->Text += "÷";
+	if (lblOutput->Text != "0" && finishedCalculation)
+		lblOutput->Text += "÷";
 }
 
 void Calculator::btnAdd_Click(System::Object^ sender, System::EventArgs^ e)
 {
-	if (lblResult->Text != "0")
-		lblResult->Text += "+";
+	/*if (lblOutput->Text != "0")
+	{
+		firstNumber = lblOutput->Text;
+		operation = '+';
+		finishedCalculation = false;
+
+		lblOutput->Text = "0";
+	}*/
+
+	if (lblOutput->Text != "0" && finishedCalculation)
+		lblOutput->Text += "+";
 }
 
 void Calculator::btnSubtract_Click(System::Object^ sender, System::EventArgs^ e)
 {
-	if (lblResult->Text != "0")
-		lblResult->Text += "-";
+	if (lblOutput->Text != "0")
+		lblOutput->Text += "-";
 }
 
 void Calculator::btnClear_Click(System::Object^ sender, System::EventArgs^ e)
 {
-	lblResult->Text = "0";
+	lblOutput->Text = "0";
 }
 
 void Calculator::btnEquals_Click(System::Object^ sender, System::EventArgs^ e)
 {
+	/*CalculatorLogic calculatorLogic{};
+	float result;
 
+	secondNumber = lblOutput->Text;
+	result = calculatorLogic.CalculateResult(firstNumber, secondNumber, operation);
+
+	lblOutput->Text = Convert::ToString(result);
+	finishedCalculation = true;*/
+
+	CalculatorLogic calculatorLogic{};
+
+	lblOutput->Text = calculatorLogic.InfixToPostfix(lblOutput->Text);
+	//lblOutput->Text = "no";
+	std::cout << "Calculated";
+}
+
+void Calculator::btnDecimal_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	if (lblOutput->Text != "0")
+		lblOutput->Text += ".";
+}
+
+void Calculator::btnExponential_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	if (lblOutput->Text != "0")
+		lblOutput->Text += "^";
+}
+
+void Calculator::btnLeftParen_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	UpdateOutput("(");
+}
+
+void Calculator::btnRightParen_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	if (lblOutput->Text != "0")
+		lblOutput->Text += ")";
 }
