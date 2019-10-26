@@ -136,11 +136,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Calculator.cpp" />
+    <ClCompile Include="CalculatorLogic.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Calculator.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="CalculatorLogic.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Calculator.resx">
