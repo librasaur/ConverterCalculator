@@ -1,27 +1,17 @@
 #pragma once
+#include <string>
+#include <stack>
 
 namespace ConverterCalculator
 {
-	using namespace System;
-
 	ref class CalculatorLogic
 	{
 	public:
-		int StringToInt(String^ stringToConvert);
-
-		String^ InfixToPostfix(String^ stringExpression);
-		int IsRightAssociative(char op);
-		int GetOperatorPrecedence(char op);
-		bool HasHigherPrecedence(char firstOp, char secondOp);
-		bool HasEqualPrecedence(char firstOp, char secondOp);
-
-		//float CalculateResult(String^ firstNum, String^ secondNum, char operation);
-
-		int MultiplyNumbers(int firstNum, int secondNum);
-		int DivideNumbers(int firstNum, int secondNum);
-		int AddNumbers(int firstNum, int secondNum);
-		int SubtractNumbers(int firstNum, int secondNum);
-
-		float accumulator = 0;
+		std::string inToPost(std::string expression);
+		bool isOperator(char token);
+		int getWeight(std::string op);
+		bool hasHigherPrecedence(std::string op1, std::string op2);
+		bool isRightAssociative(std::string op);
+		float calculate(float num1, float num2, char op);
 	};
 }

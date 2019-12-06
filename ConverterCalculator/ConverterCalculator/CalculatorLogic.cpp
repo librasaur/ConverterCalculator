@@ -1,177 +1,309 @@
-#include "CalculatorLogic.h"
+ï»¿#include "CalculatorLogic.h"
 #include <string>
-#include <queue>
 #include <stack>
-#include <msclr/marshal_cppstd.h>
+#include <cmath>
+#include <iostream>
 
 using namespace ConverterCalculator;
 
-int CalculatorLogic::StringToInt(String^ stringToConvert)
+enum TokenType
 {
-	return int::Parse(stringToConvert);
-}
+	TOKENTYPE_OPERAND,
+	TOKENTYPE_OPERATOR
+};
 
-String^ CalculatorLogic::InfixToPostfix(String^ _stringExpression)
+class Token
 {
-	// Convert System::String to std::string
-	msclr::interop::marshal_context context;
-	std::string infix = context.marshal_as<std::string>(_stringExpression);
+public:
+	std::string value;
+	TokenType type;
 
-	const std::string operands = "1234567890";
-	const std::string operators = "x÷+-";
-
-	std::stack<char> stack;
-	std::string postfix = "";
-
-	for (int c = 0; c < infix.length(); c++)
+	Token(std::string _value, TokenType _type)
 	{
+		this->value = _value;
+		this->type = _type;
+	}
+};
 
-		if (operands.find(infix[c]))
+std::string CalculatorLogic::inToPost(std::string expression)
+{
+	//
+	// SPLIT STRING INTO STACK
+	//
+
+	std::stack<Token> infixStackTemp;
+	std::string digit = "";
+
+	bool error = false;
+	bool containsDecimal = false;
+	bool operatorJustFound = false;
+	bool sqrRoot = false;
+
+	for (int i = 0; i < expression.length(); i++)
+	{
+		if (expression[i] == 'V')
 		{
-			postfix += infix[c];
+			sqrRoot = true;
 		}
 
-		else if (operators.find(infix[c]))
+		// Check if first digit is negative
+		else if (i == 0 && expression[i] == '-')
 		{
-			while (!stack.empty() && (HasEqualPrecedence(stack.top(), infix[c]) || (HasEqualPrecedence(stack.top(), infix[c]) && IsRightAssociative(stack.top()))) && (stack.top() != '('))
+			digit += expression[i];
+		}
+
+		// Create digit
+		else if (isdigit(expression[i]) || (expression[i] == '.' && !containsDecimal))
+		{
+			operatorJustFound = false;
+
+			if (expression[i] == '.') containsDecimal = true; // Stops user using double decimals
+
+			digit += expression[i];
+
+			if (i == expression.length() - 1) // If it's reached the end of the evaluation
 			{
-				postfix += stack.top();
-				stack.pop();
+				if (sqrRoot)
+				{
+					int sqrDigit = std::stoi(digit);
+
+					infixStackTemp.push(Token(std::to_string(sqrt(sqrDigit)), TOKENTYPE_OPERAND));
+					sqrRoot = false;
+				}
+				else
+				{
+					infixStackTemp.push(Token(digit, TOKENTYPE_OPERAND));
+				}
 			}
-			stack.push(infix[c]);
 		}
 
-		else if (infix[c] == '(')
+		// Add operator
+		else if ((isOperator(expression[i]) || expression[i] == ')') && operatorJustFound == false)
 		{
-			stack.push(infix[c]);
-		}
+			operatorJustFound = true;
 
-		else if (infix[c] == ')')
-		{
-			while (!stack.empty() && stack.top() != '(')
+			if (!sqrRoot)
 			{
-				postfix += stack.top();
-				stack.pop();
+				infixStackTemp.push(Token(digit, TOKENTYPE_OPERAND));
 			}
-			stack.pop();
+			else if (sqrRoot)
+			{
+				int sqrDigit = std::stoi(digit);
+
+				infixStackTemp.push(Token(std::to_string(sqrt(sqrDigit)), TOKENTYPE_OPERAND));
+				sqrRoot = false;
+			}
+
+			infixStackTemp.push(Token(expression.substr(i, 1), TOKENTYPE_OPERATOR));
+
+			digit = "";
+			containsDecimal = false;
+		}
+
+		// If user enters more than one decimal in one digit or two operators in a row, display error
+		else if ((expression[i] == '.' && containsDecimal) || operatorJustFound == true)
+		{
+			error = true;
 		}
 	}
 
-	while (!stack.empty())
+	// If there is only one value in the stack
+	if (infixStackTemp.size() == 1)
+		return infixStackTemp.top().value;
+
+
+	// If there is an expression to evaluate
+	else if (!error && infixStackTemp.size() > 2)
 	{
-		postfix += stack.top();
-		stack.pop();
+		std::stack<Token> infixStack;
+
+		// Reverse stack order
+		while (!infixStackTemp.empty())
+		{
+			infixStack.push(infixStackTemp.top());
+			infixStackTemp.pop();
+		}
+
+		//
+		// CREATE POSTFIX
+		//
+
+		int infixSize = infixStack.size();
+		std::stack<Token> stackTemp;
+		stackTemp.push(Token("#", TOKENTYPE_OPERATOR)); // Random char pushed to stack to avoid null pointer
+		std::stack<Token> postfixStackTemp;
+
+		for (int t = 0; t < infixSize; t++)
+		{
+			Token token = infixStack.top(); infixStack.pop();
+
+			if (token.type == TOKENTYPE_OPERATOR)
+			{
+				while (!stackTemp.empty() && stackTemp.top().value != "(" && hasHigherPrecedence(stackTemp.top().value, token.value))
+				{
+					postfixStackTemp.push(stackTemp.top());
+					stackTemp.pop();
+				}
+				stackTemp.push(token);
+			}
+
+			else if (token.type == TOKENTYPE_OPERAND)
+				postfixStackTemp.push(token);
+
+			else if (token.value == "(")
+				stackTemp.push(token);
+
+			else if (token.value == ")")
+			{
+				while (!stackTemp.empty() && stackTemp.top().value != "(")
+				{
+					postfixStackTemp.push(stackTemp.top());
+					stackTemp.pop();
+				}
+				stackTemp.pop();
+			}
+
+		}
+
+		while (stackTemp.top().value != "#")
+		{
+			postfixStackTemp.push(stackTemp.top());
+			stackTemp.pop();
+		}
+
+
+		std::stack<Token> postfixStack;
+
+		// Reverse stack order
+		while (!postfixStackTemp.empty())
+		{
+			postfixStack.push(postfixStackTemp.top());
+			postfixStackTemp.pop();
+		}
+
+
+		//
+		// EVALUATE EXPRESSION
+		//
+
+		int postfixSize = postfixStack.size();
+
+		if (postfixSize > 1)
+		{
+			std::stack<float> evaluation;
+
+			for (int t = 0; t < postfixSize; t++)
+			{
+				Token token = postfixStack.top(); postfixStack.pop();
+
+				if (token.type == TOKENTYPE_OPERAND)
+				{
+					evaluation.push(std::stof(token.value));
+				}
+
+				else if (token.type == TOKENTYPE_OPERATOR)
+				{
+					float num1 = evaluation.top(); evaluation.pop();
+					float num2 = evaluation.top(); evaluation.pop();
+
+					if (token.value == "%")
+						evaluation.push(num2);
+
+					float result = calculate(num1, num2, token.value[0]);
+					evaluation.push(result);
+				}
+			}
+
+			return std::to_string(evaluation.top());
+		}
 	}
 
-	String^ postfixResult = gcnew String(postfix.c_str());
-	return postfixResult;
+	else return "Error";
 }
 
-
-int CalculatorLogic::IsRightAssociative(char op)
+bool CalculatorLogic::isOperator(char token)
 {
-	if (op == '^')
+	switch (token)
+	{
+	case '+':
+	case '-':
+	case '*':
+	case '/':
+	case '%':
+	case '^':
+		return true;
+		break;
+
+	default:
+		return false;
+		break;
+	}
+}
+
+int CalculatorLogic::getWeight(std::string op)
+{
+	int weight = -1;
+
+	if (op == "+" || op == "-") weight = 1;
+	else if (op == "*" || op == "/" || op == "%") weight = 2;
+	else if (op == "^") weight = 3;
+
+	return weight;
+}
+
+bool CalculatorLogic::hasHigherPrecedence(std::string op1, std::string op2)
+{
+	int op1Weight = getWeight(op1);
+	int op2Weight = getWeight(op2);
+
+	if (op1Weight > op2Weight)
+		return true;
+	else
+		return false;
+}
+
+bool CalculatorLogic::isRightAssociative(std::string op)
+{
+	if (op == "^")
 		return true;
 	else
 		return false;
 }
 
 
-int CalculatorLogic::GetOperatorPrecedence(char op)
-{
-	int precedence = -1;
+//
+// CALCULATIONS
+//
 
+float CalculatorLogic::calculate(float num1, float num2, char op)
+{
 	switch (op)
 	{
 	case '+':
+		return num1 + num2;
+		break;
+
 	case '-':
-		precedence = 1;
+		return num2 - num1;
 		break;
 
 	case '*':
-	case '÷':
-		precedence = 2;
+		return num1 * num2;
+		break;
+
+	case '/':
+		if (num1 == 0)
+			return 0;
+		else
+			return num2 / num1;
 		break;
 
 	case '^':
-		precedence = 3;
+		return pow(num2, num1);
+		break;
+
+	case '%':
+		return int(num2) % int(num1);
 		break;
 	}
-
-	return precedence;
-}
-
-
-bool CalculatorLogic::HasHigherPrecedence(char firstOp, char secondOp)
-{
-	int firstOpPrecedence = GetOperatorPrecedence(firstOp);
-	int secondOpPrecedence = GetOperatorPrecedence(secondOp);
-
-	if (firstOpPrecedence > secondOpPrecedence) return true;
-	else return false;
-}
-
-
-bool CalculatorLogic::HasEqualPrecedence(char firstOp, char secondOp)
-{
-	int firstOpPrecedence = GetOperatorPrecedence(firstOp);
-	int secondOpPrecedence = GetOperatorPrecedence(secondOp);
-
-	if (firstOpPrecedence == secondOpPrecedence) return true;
-	else return false;
-}
-
-
-//float CalculatorLogic::CalculateResult(String^ _firstNumber, String^ _secondNumber, char operation)
-//{
-//	int firstNumber = StringToInt(_firstNumber);
-//	int secondNumber = StringToInt(_secondNumber);
-//
-//	float result = 0;
-//
-//	switch (operation)
-//	{
-//	case 'x':
-//		result = MultiplyNumbers(firstNumber, secondNumber);
-//		break;
-//
-//	case '÷':
-//		result = DivideNumbers(firstNumber, secondNumber);
-//		break;
-//
-//	case '+':
-//		result = AddNumbers(firstNumber, secondNumber);
-//		break;
-//
-//	case '-':
-//		result = SubtractNumbers(firstNumber, secondNumber);
-//		break;
-//
-//	default:
-//		break;
-//	}
-//
-//	return result;
-//}
-
-// == MATHEMATIC LOGIC METHODS ==
-
-int CalculatorLogic::MultiplyNumbers(int firstNum, int secondNum)
-{
-	return firstNum * secondNum;
-}
-
-int CalculatorLogic::DivideNumbers(int firstNum, int secondNum)
-{
-	return firstNum / secondNum;
-}
-
-int CalculatorLogic::AddNumbers(int firstNum, int secondNum)
-{
-	return firstNum + secondNum;
-}
-
-int CalculatorLogic::SubtractNumbers(int firstNum, int secondNum)
-{
-	return firstNum - secondNum;
 }

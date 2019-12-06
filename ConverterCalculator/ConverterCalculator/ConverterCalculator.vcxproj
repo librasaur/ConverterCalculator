@@ -137,12 +137,14 @@
   <ItemGroup>
     <ClCompile Include="Calculator.cpp" />
     <ClCompile Include="CalculatorLogic.cpp" />
+    <ClCompile Include="ConversionLogic.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Calculator.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="CalculatorLogic.h" />
+    <ClInclude Include="ConversionLogic.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Calculator.resx">

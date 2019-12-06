@@ -1,0 +1,4 @@
+-> Get expression
+-> Split expression into array (infix order)
+-> Create array of postfix expression
+-> Evaluate expression
