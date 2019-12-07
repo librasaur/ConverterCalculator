@@ -135,16 +135,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BinaryConversions.cpp" />
     <ClCompile Include="Calculator.cpp" />
     <ClCompile Include="CalculatorLogic.cpp" />
     <ClCompile Include="ConversionLogic.cpp" />
+    <ClCompile Include="DecimalConversions.cpp" />
+    <ClCompile Include="HexConversions.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BinaryConversions.h" />
     <ClInclude Include="Calculator.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="CalculatorLogic.h" />
     <ClInclude Include="ConversionLogic.h" />
+    <ClInclude Include="DecimalConversions.h" />
+    <ClInclude Include="HexConversions.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Calculator.resx">

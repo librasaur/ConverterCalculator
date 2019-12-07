@@ -1,5 +1,4 @@
 #include "ConversionLogic.h"
-#include <string>
 
 using namespace ConverterCalculator;
 
