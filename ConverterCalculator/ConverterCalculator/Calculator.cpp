@@ -1,6 +1,9 @@
 ﻿#include "Calculator.h"
 #include "CalculatorLogic.h"
 #include "ConversionLogic.h"
+#include "DecimalConversions.h"
+#include "BinaryConversions.h"
+#include "HexConversions.h"
 #include <msclr/marshal_cppstd.h>
 #include <string>
 
@@ -360,4 +363,101 @@ void Calculator::TextBoxMathsFrom_TextChanged(System::Object^ sender, System::Ev
 
 		textBoxMathsTo->Text = gcnew String(result.c_str());
 	}
+}
+
+//
+// == BASE CONVERSIONS ==
+//
+
+// = DECIMAL =
+
+void Calculator::ButtonConvertDecimal_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	DecimalConversions dc{};
+	std::string result;
+
+	// Get value
+	msclr::interop::marshal_context context;
+	std::string value = context.marshal_as<std::string>(textBoxDecimal->Text);
+
+	// Get convert
+	String^ convertTo = comboBoxDecimalConversion->Text;
+	lblBinaryConversion->Text = convertTo + ":";
+
+	// Do conversion
+	if (convertTo == "Binary (Base 2)")
+	{
+		result = dc.DecToBin(value);
+	}
+	else if (convertTo == "Hexadecimal (Base 16)")
+	{
+		result = dc.DecToHex(value);
+	}
+
+	// Display result
+	if (result == "error")
+	{
+		System::Windows::Forms::MessageBox::Show(L"Please enter a value < 256", L"",
+			System::Windows::Forms::MessageBoxButtons::OK);
+	}
+	else
+		textBoxDecimalConverted->Text = gcnew String(result.c_str());
+}
+
+// = BINARY =
+
+void Calculator::ButtonConvertBinary_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	BinaryConversions bc{};
+	std::string result;
+
+	// Get value
+	msclr::interop::marshal_context context;
+	std::string value = context.marshal_as<std::string>(textBoxBinary->Text);
+
+	// Get convert
+	String^ convertTo = comboBoxBinaryConversions->Text;
+	lblBinaryConversion->Text = convertTo + ":";
+
+	// Do conversion
+	if (convertTo == "Decimal (Base 10)")
+	{
+		result = bc.BinToDec(value);
+	}
+	else if (convertTo == "Hexadecimal (Base 16)")
+	{
+		result = bc.BinToHex(value);
+	}
+
+	// Display result
+	textBoxBinaryConverted->Text = gcnew String(result.c_str());
+}
+
+// = HEXADECIMAL =
+
+void Calculator::ButtonConvertHex_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	HexConversions hc{};
+	std::string result;
+
+	// Get value
+	msclr::interop::marshal_context context;
+	std::string value = context.marshal_as<std::string>(textBoxHex->Text);
+
+	// Get convert
+	String^ convertTo = comboBoxHexConversions->Text;
+	lblHexConversions->Text = convertTo + ":";
+
+	// Do conversion
+	if (convertTo == "Decimal (Base 10)")
+	{
+		result = hc.HexToDec(value);
+	}
+	else if (convertTo == "Binary (Base 2)")
+	{
+		result = hc.HexToBin(value);
+	}
+
+	// Display result
+	textBoxHexConverted->Text = gcnew String(result.c_str());
 }

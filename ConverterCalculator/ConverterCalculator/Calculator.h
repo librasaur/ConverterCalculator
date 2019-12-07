@@ -33,7 +33,8 @@ namespace ConverterCalculator {
 
 
 	private: System::Windows::Forms::TabPage^ tabPageHex;
-	private: System::Windows::Forms::TextBox^ textBoxConvertedHex;
+	private: System::Windows::Forms::TextBox^ textBoxHexConverted;
+
 
 
 	private: System::Windows::Forms::TextBox^ textBoxHex;
@@ -56,6 +57,9 @@ namespace ConverterCalculator {
 	private: System::Windows::Forms::ComboBox^ comboBoxBinaryConversions;
 	private: System::Windows::Forms::Button^ buttonConvertHex;
 	private: System::Windows::Forms::ComboBox^ comboBoxHexConversions;
+	private: System::Windows::Forms::Label^ lblDecimalConversion;
+	private: System::Windows::Forms::Label^ lblBinaryConversion;
+	private: System::Windows::Forms::Label^ lblHexConversions;
 	private: System::Windows::Forms::Button^ buttonConvertDecimal;
 
 
@@ -250,12 +254,16 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			this->lblConvertedDecimal = (gcnew System::Windows::Forms::Label());
 			this->lblDecimal = (gcnew System::Windows::Forms::Label());
 			this->tabPageBinary = (gcnew System::Windows::Forms::TabPage());
+			this->buttonConvertBinary = (gcnew System::Windows::Forms::Button());
+			this->comboBoxBinaryConversions = (gcnew System::Windows::Forms::ComboBox());
 			this->textBoxBinaryConverted = (gcnew System::Windows::Forms::TextBox());
 			this->textBoxBinary = (gcnew System::Windows::Forms::TextBox());
 			this->lblBinaryConverted = (gcnew System::Windows::Forms::Label());
 			this->lblBinary = (gcnew System::Windows::Forms::Label());
 			this->tabPageHex = (gcnew System::Windows::Forms::TabPage());
-			this->textBoxConvertedHex = (gcnew System::Windows::Forms::TextBox());
+			this->buttonConvertHex = (gcnew System::Windows::Forms::Button());
+			this->comboBoxHexConversions = (gcnew System::Windows::Forms::ComboBox());
+			this->textBoxHexConverted = (gcnew System::Windows::Forms::TextBox());
 			this->textBoxHex = (gcnew System::Windows::Forms::TextBox());
 			this->lblConvertedHex = (gcnew System::Windows::Forms::Label());
 			this->lblHex = (gcnew System::Windows::Forms::Label());
@@ -302,10 +310,9 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			this->textBoxMathsFrom = (gcnew System::Windows::Forms::TextBox());
 			this->label10 = (gcnew System::Windows::Forms::Label());
 			this->label9 = (gcnew System::Windows::Forms::Label());
-			this->buttonConvertBinary = (gcnew System::Windows::Forms::Button());
-			this->comboBoxBinaryConversions = (gcnew System::Windows::Forms::ComboBox());
-			this->buttonConvertHex = (gcnew System::Windows::Forms::Button());
-			this->comboBoxHexConversions = (gcnew System::Windows::Forms::ComboBox());
+			this->lblBinaryConversion = (gcnew System::Windows::Forms::Label());
+			this->lblHexConversions = (gcnew System::Windows::Forms::Label());
+			this->lblDecimalConversion = (gcnew System::Windows::Forms::Label());
 			this->tabControlApp->SuspendLayout();
 			this->tabPageCalculator->SuspendLayout();
 			this->tabPageConversions->SuspendLayout();
@@ -719,6 +726,7 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			// 
 			this->tabPageDecimal->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(174)), static_cast<System::Int32>(static_cast<System::Byte>(230)),
 				static_cast<System::Int32>(static_cast<System::Byte>(203)));
+			this->tabPageDecimal->Controls->Add(this->lblDecimalConversion);
 			this->tabPageDecimal->Controls->Add(this->buttonConvertDecimal);
 			this->tabPageDecimal->Controls->Add(this->comboBoxDecimalConversion);
 			this->tabPageDecimal->Controls->Add(this->textBoxDecimalConverted);
@@ -755,7 +763,7 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			this->comboBoxDecimalConversion->MaxDropDownItems = 2;
 			this->comboBoxDecimalConversion->Name = L"comboBoxDecimalConversion";
 			this->comboBoxDecimalConversion->Size = System::Drawing::Size(190, 27);
-			this->comboBoxDecimalConversion->TabIndex = 0;
+			this->comboBoxDecimalConversion->TabIndex = 17;
 			// 
 			// textBoxDecimalConverted
 			// 
@@ -779,9 +787,8 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			this->lblConvertedDecimal->AutoSize = true;
 			this->lblConvertedDecimal->Location = System::Drawing::Point(3, 125);
 			this->lblConvertedDecimal->Name = L"lblConvertedDecimal";
-			this->lblConvertedDecimal->Size = System::Drawing::Size(80, 19);
+			this->lblConvertedDecimal->Size = System::Drawing::Size(0, 19);
 			this->lblConvertedDecimal->TabIndex = 15;
-			this->lblConvertedDecimal->Text = L"Converted:";
 			// 
 			// lblDecimal
 			// 
@@ -796,6 +803,7 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			// 
 			this->tabPageBinary->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(174)), static_cast<System::Int32>(static_cast<System::Byte>(230)),
 				static_cast<System::Int32>(static_cast<System::Byte>(203)));
+			this->tabPageBinary->Controls->Add(this->lblBinaryConversion);
 			this->tabPageBinary->Controls->Add(this->buttonConvertBinary);
 			this->tabPageBinary->Controls->Add(this->comboBoxBinaryConversions);
 			this->tabPageBinary->Controls->Add(this->textBoxBinaryConverted);
@@ -808,6 +816,31 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			this->tabPageBinary->Size = System::Drawing::Size(407, 163);
 			this->tabPageBinary->TabIndex = 1;
 			this->tabPageBinary->Text = L"Binary";
+			// 
+			// buttonConvertBinary
+			// 
+			this->buttonConvertBinary->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(147)),
+				static_cast<System::Int32>(static_cast<System::Byte>(194)), static_cast<System::Int32>(static_cast<System::Byte>(171)));
+			this->buttonConvertBinary->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->buttonConvertBinary->Font = (gcnew System::Drawing::Font(L"Calibri Light", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->buttonConvertBinary->Location = System::Drawing::Point(214, 66);
+			this->buttonConvertBinary->Name = L"buttonConvertBinary";
+			this->buttonConvertBinary->Size = System::Drawing::Size(91, 27);
+			this->buttonConvertBinary->TabIndex = 20;
+			this->buttonConvertBinary->Text = L"Convert";
+			this->buttonConvertBinary->UseVisualStyleBackColor = false;
+			this->buttonConvertBinary->Click += gcnew System::EventHandler(this, &Calculator::ButtonConvertBinary_Click);
+			// 
+			// comboBoxBinaryConversions
+			// 
+			this->comboBoxBinaryConversions->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->comboBoxBinaryConversions->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Decimal (Base 10)", L"Hexadecimal (Base 16)" });
+			this->comboBoxBinaryConversions->Location = System::Drawing::Point(7, 66);
+			this->comboBoxBinaryConversions->MaxDropDownItems = 2;
+			this->comboBoxBinaryConversions->Name = L"comboBoxBinaryConversions";
+			this->comboBoxBinaryConversions->Size = System::Drawing::Size(190, 27);
+			this->comboBoxBinaryConversions->TabIndex = 19;
 			// 
 			// textBoxBinaryConverted
 			// 
@@ -831,9 +864,8 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			this->lblBinaryConverted->AutoSize = true;
 			this->lblBinaryConverted->Location = System::Drawing::Point(3, 125);
 			this->lblBinaryConverted->Name = L"lblBinaryConverted";
-			this->lblBinaryConverted->Size = System::Drawing::Size(80, 19);
+			this->lblBinaryConverted->Size = System::Drawing::Size(0, 19);
 			this->lblBinaryConverted->TabIndex = 15;
-			this->lblBinaryConverted->Text = L"Converted:";
 			// 
 			// lblBinary
 			// 
@@ -848,9 +880,10 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			// 
 			this->tabPageHex->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(174)), static_cast<System::Int32>(static_cast<System::Byte>(230)),
 				static_cast<System::Int32>(static_cast<System::Byte>(203)));
+			this->tabPageHex->Controls->Add(this->lblHexConversions);
 			this->tabPageHex->Controls->Add(this->buttonConvertHex);
 			this->tabPageHex->Controls->Add(this->comboBoxHexConversions);
-			this->tabPageHex->Controls->Add(this->textBoxConvertedHex);
+			this->tabPageHex->Controls->Add(this->textBoxHexConverted);
 			this->tabPageHex->Controls->Add(this->textBoxHex);
 			this->tabPageHex->Controls->Add(this->lblConvertedHex);
 			this->tabPageHex->Controls->Add(this->lblHex);
@@ -860,14 +893,39 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			this->tabPageHex->TabIndex = 2;
 			this->tabPageHex->Text = L"Hexadecimal";
 			// 
-			// textBoxConvertedHex
+			// buttonConvertHex
 			// 
-			this->textBoxConvertedHex->BackColor = System::Drawing::SystemColors::ControlLight;
-			this->textBoxConvertedHex->Enabled = false;
-			this->textBoxConvertedHex->Location = System::Drawing::Point(172, 122);
-			this->textBoxConvertedHex->Name = L"textBoxConvertedHex";
-			this->textBoxConvertedHex->Size = System::Drawing::Size(228, 27);
-			this->textBoxConvertedHex->TabIndex = 12;
+			this->buttonConvertHex->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(147)),
+				static_cast<System::Int32>(static_cast<System::Byte>(194)), static_cast<System::Int32>(static_cast<System::Byte>(171)));
+			this->buttonConvertHex->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->buttonConvertHex->Font = (gcnew System::Drawing::Font(L"Calibri Light", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->buttonConvertHex->Location = System::Drawing::Point(214, 66);
+			this->buttonConvertHex->Name = L"buttonConvertHex";
+			this->buttonConvertHex->Size = System::Drawing::Size(91, 27);
+			this->buttonConvertHex->TabIndex = 20;
+			this->buttonConvertHex->Text = L"Convert";
+			this->buttonConvertHex->UseVisualStyleBackColor = false;
+			this->buttonConvertHex->Click += gcnew System::EventHandler(this, &Calculator::ButtonConvertHex_Click);
+			// 
+			// comboBoxHexConversions
+			// 
+			this->comboBoxHexConversions->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->comboBoxHexConversions->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Decimal (Base 10)", L"Binary (Base 2)" });
+			this->comboBoxHexConversions->Location = System::Drawing::Point(7, 66);
+			this->comboBoxHexConversions->MaxDropDownItems = 2;
+			this->comboBoxHexConversions->Name = L"comboBoxHexConversions";
+			this->comboBoxHexConversions->Size = System::Drawing::Size(190, 27);
+			this->comboBoxHexConversions->TabIndex = 19;
+			// 
+			// textBoxHexConverted
+			// 
+			this->textBoxHexConverted->BackColor = System::Drawing::SystemColors::ControlLight;
+			this->textBoxHexConverted->Enabled = false;
+			this->textBoxHexConverted->Location = System::Drawing::Point(172, 122);
+			this->textBoxHexConverted->Name = L"textBoxHexConverted";
+			this->textBoxHexConverted->Size = System::Drawing::Size(228, 27);
+			this->textBoxHexConverted->TabIndex = 12;
 			// 
 			// textBoxHex
 			// 
@@ -882,9 +940,8 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			this->lblConvertedHex->AutoSize = true;
 			this->lblConvertedHex->Location = System::Drawing::Point(3, 125);
 			this->lblConvertedHex->Name = L"lblConvertedHex";
-			this->lblConvertedHex->Size = System::Drawing::Size(80, 19);
+			this->lblConvertedHex->Size = System::Drawing::Size(0, 19);
 			this->lblConvertedHex->TabIndex = 11;
-			this->lblConvertedHex->Text = L"Converted:";
 			// 
 			// lblHex
 			// 
@@ -1385,53 +1442,32 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			this->label9->TabIndex = 9;
 			this->label9->Text = L"From:";
 			// 
-			// buttonConvertBinary
+			// lblBinaryConversion
 			// 
-			this->buttonConvertBinary->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(147)),
-				static_cast<System::Int32>(static_cast<System::Byte>(194)), static_cast<System::Int32>(static_cast<System::Byte>(171)));
-			this->buttonConvertBinary->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->buttonConvertBinary->Font = (gcnew System::Drawing::Font(L"Calibri Light", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->buttonConvertBinary->Location = System::Drawing::Point(214, 66);
-			this->buttonConvertBinary->Name = L"buttonConvertBinary";
-			this->buttonConvertBinary->Size = System::Drawing::Size(91, 27);
-			this->buttonConvertBinary->TabIndex = 20;
-			this->buttonConvertBinary->Text = L"Convert";
-			this->buttonConvertBinary->UseVisualStyleBackColor = false;
+			this->lblBinaryConversion->AutoSize = true;
+			this->lblBinaryConversion->Location = System::Drawing::Point(9, 125);
+			this->lblBinaryConversion->Name = L"lblBinaryConversion";
+			this->lblBinaryConversion->Size = System::Drawing::Size(85, 19);
+			this->lblBinaryConversion->TabIndex = 21;
+			this->lblBinaryConversion->Text = L"Conversion:";
 			// 
-			// comboBoxBinaryConversions
+			// lblHexConversions
 			// 
-			this->comboBoxBinaryConversions->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-			this->comboBoxBinaryConversions->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Decimal (Base 10)", L"Hexadecimal (Base 16)" });
-			this->comboBoxBinaryConversions->Location = System::Drawing::Point(7, 66);
-			this->comboBoxBinaryConversions->MaxDropDownItems = 2;
-			this->comboBoxBinaryConversions->Name = L"comboBoxBinaryConversions";
-			this->comboBoxBinaryConversions->Size = System::Drawing::Size(190, 27);
-			this->comboBoxBinaryConversions->TabIndex = 19;
+			this->lblHexConversions->AutoSize = true;
+			this->lblHexConversions->Location = System::Drawing::Point(9, 125);
+			this->lblHexConversions->Name = L"lblHexConversions";
+			this->lblHexConversions->Size = System::Drawing::Size(85, 19);
+			this->lblHexConversions->TabIndex = 22;
+			this->lblHexConversions->Text = L"Conversion:";
 			// 
-			// buttonConvertHex
+			// lblDecimalConversion
 			// 
-			this->buttonConvertHex->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(147)),
-				static_cast<System::Int32>(static_cast<System::Byte>(194)), static_cast<System::Int32>(static_cast<System::Byte>(171)));
-			this->buttonConvertHex->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->buttonConvertHex->Font = (gcnew System::Drawing::Font(L"Calibri Light", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->buttonConvertHex->Location = System::Drawing::Point(214, 66);
-			this->buttonConvertHex->Name = L"buttonConvertHex";
-			this->buttonConvertHex->Size = System::Drawing::Size(91, 27);
-			this->buttonConvertHex->TabIndex = 20;
-			this->buttonConvertHex->Text = L"Convert";
-			this->buttonConvertHex->UseVisualStyleBackColor = false;
-			// 
-			// comboBoxHexConversions
-			// 
-			this->comboBoxHexConversions->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-			this->comboBoxHexConversions->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Decimal (Base 10)", L"Binary (Base 2)" });
-			this->comboBoxHexConversions->Location = System::Drawing::Point(7, 66);
-			this->comboBoxHexConversions->MaxDropDownItems = 2;
-			this->comboBoxHexConversions->Name = L"comboBoxHexConversions";
-			this->comboBoxHexConversions->Size = System::Drawing::Size(190, 27);
-			this->comboBoxHexConversions->TabIndex = 19;
+			this->lblDecimalConversion->AutoSize = true;
+			this->lblDecimalConversion->Location = System::Drawing::Point(9, 125);
+			this->lblDecimalConversion->Name = L"lblDecimalConversion";
+			this->lblDecimalConversion->Size = System::Drawing::Size(85, 19);
+			this->lblDecimalConversion->TabIndex = 22;
+			this->lblDecimalConversion->Text = L"Conversion:";
 			// 
 			// Calculator
 			// 
@@ -1503,5 +1539,8 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 	private: Void TextBoxSpeedFrom_TextChanged(System::Object^ sender, System::EventArgs^ e);
 	private: Void TextBoxTempFrom_TextChanged(System::Object^ sender, System::EventArgs^ e);
 	private: Void TextBoxMathsFrom_TextChanged(System::Object^ sender, System::EventArgs^ e);
+	private: Void ButtonConvertDecimal_Click(System::Object^ sender, System::EventArgs^ e);
+	private: Void ButtonConvertBinary_Click(System::Object^ sender, System::EventArgs^ e);
+	private: Void ButtonConvertHex_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }
