@@ -21,6 +21,55 @@ namespace ConverterCalculator {
 		void UpdateOutput(String^ textToAdd);
 		String^ previousExpression;
 		bool operatorJustAdded, decimalJustAdded;
+	private: System::Windows::Forms::TabControl^ tabControlBaseConversions;
+	private: System::Windows::Forms::TabPage^ tabPageDecimal;
+
+
+
+
+	private: System::Windows::Forms::TabPage^ tabPageBinary;
+
+
+
+
+	private: System::Windows::Forms::TabPage^ tabPageHex;
+	private: System::Windows::Forms::TextBox^ textBoxConvertedHex;
+
+
+	private: System::Windows::Forms::TextBox^ textBoxHex;
+	private: System::Windows::Forms::Label^ lblConvertedHex;
+
+
+
+	private: System::Windows::Forms::Label^ lblHex;
+	private: System::Windows::Forms::TextBox^ textBoxDecimalConverted;
+	private: System::Windows::Forms::TextBox^ textBoxDecimal;
+	private: System::Windows::Forms::Label^ lblConvertedDecimal;
+	private: System::Windows::Forms::Label^ lblDecimal;
+	private: System::Windows::Forms::TextBox^ textBoxBinaryConverted;
+
+	private: System::Windows::Forms::TextBox^ textBoxBinary;
+	private: System::Windows::Forms::Label^ lblBinaryConverted;
+	private: System::Windows::Forms::Label^ lblBinary;
+	private: System::Windows::Forms::ComboBox^ comboBoxDecimalConversion;
+	private: System::Windows::Forms::Button^ buttonConvertBinary;
+	private: System::Windows::Forms::ComboBox^ comboBoxBinaryConversions;
+	private: System::Windows::Forms::Button^ buttonConvertHex;
+	private: System::Windows::Forms::ComboBox^ comboBoxHexConversions;
+	private: System::Windows::Forms::Button^ buttonConvertDecimal;
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	protected:
 		~Calculator()
@@ -192,6 +241,24 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			this->tabPageCalculator = (gcnew System::Windows::Forms::TabPage());
 			this->lblExpression = (gcnew System::Windows::Forms::Label());
 			this->tabPageConversions = (gcnew System::Windows::Forms::TabPage());
+			this->tabControlBaseConversions = (gcnew System::Windows::Forms::TabControl());
+			this->tabPageDecimal = (gcnew System::Windows::Forms::TabPage());
+			this->buttonConvertDecimal = (gcnew System::Windows::Forms::Button());
+			this->comboBoxDecimalConversion = (gcnew System::Windows::Forms::ComboBox());
+			this->textBoxDecimalConverted = (gcnew System::Windows::Forms::TextBox());
+			this->textBoxDecimal = (gcnew System::Windows::Forms::TextBox());
+			this->lblConvertedDecimal = (gcnew System::Windows::Forms::Label());
+			this->lblDecimal = (gcnew System::Windows::Forms::Label());
+			this->tabPageBinary = (gcnew System::Windows::Forms::TabPage());
+			this->textBoxBinaryConverted = (gcnew System::Windows::Forms::TextBox());
+			this->textBoxBinary = (gcnew System::Windows::Forms::TextBox());
+			this->lblBinaryConverted = (gcnew System::Windows::Forms::Label());
+			this->lblBinary = (gcnew System::Windows::Forms::Label());
+			this->tabPageHex = (gcnew System::Windows::Forms::TabPage());
+			this->textBoxConvertedHex = (gcnew System::Windows::Forms::TextBox());
+			this->textBoxHex = (gcnew System::Windows::Forms::TextBox());
+			this->lblConvertedHex = (gcnew System::Windows::Forms::Label());
+			this->lblHex = (gcnew System::Windows::Forms::Label());
 			this->tabControlConversions = (gcnew System::Windows::Forms::TabControl());
 			this->tabPageLength = (gcnew System::Windows::Forms::TabPage());
 			this->listBoxLengthTo = (gcnew System::Windows::Forms::ListBox());
@@ -235,9 +302,17 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			this->textBoxMathsFrom = (gcnew System::Windows::Forms::TextBox());
 			this->label10 = (gcnew System::Windows::Forms::Label());
 			this->label9 = (gcnew System::Windows::Forms::Label());
+			this->buttonConvertBinary = (gcnew System::Windows::Forms::Button());
+			this->comboBoxBinaryConversions = (gcnew System::Windows::Forms::ComboBox());
+			this->buttonConvertHex = (gcnew System::Windows::Forms::Button());
+			this->comboBoxHexConversions = (gcnew System::Windows::Forms::ComboBox());
 			this->tabControlApp->SuspendLayout();
 			this->tabPageCalculator->SuspendLayout();
 			this->tabPageConversions->SuspendLayout();
+			this->tabControlBaseConversions->SuspendLayout();
+			this->tabPageDecimal->SuspendLayout();
+			this->tabPageBinary->SuspendLayout();
+			this->tabPageHex->SuspendLayout();
 			this->tabControlConversions->SuspendLayout();
 			this->tabPageLength->SuspendLayout();
 			this->tabPageWeight->SuspendLayout();
@@ -532,8 +607,8 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			// 
 			// btnDecimal
 			// 
-			this->btnDecimal->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(147)), static_cast<System::Int32>(static_cast<System::Byte>(194)),
-				static_cast<System::Int32>(static_cast<System::Byte>(171)));
+			this->btnDecimal->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(174)), static_cast<System::Int32>(static_cast<System::Byte>(230)),
+				static_cast<System::Int32>(static_cast<System::Byte>(203)));
 			this->btnDecimal->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->btnDecimal->Font = (gcnew System::Drawing::Font(L"Calibri Light", 25, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
@@ -569,7 +644,7 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			this->tabControlApp->Location = System::Drawing::Point(12, 12);
 			this->tabControlApp->Name = L"tabControlApp";
 			this->tabControlApp->SelectedIndex = 0;
-			this->tabControlApp->Size = System::Drawing::Size(435, 568);
+			this->tabControlApp->Size = System::Drawing::Size(436, 582);
 			this->tabControlApp->TabIndex = 27;
 			// 
 			// tabPageCalculator
@@ -600,7 +675,7 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			this->tabPageCalculator->Location = System::Drawing::Point(4, 28);
 			this->tabPageCalculator->Name = L"tabPageCalculator";
 			this->tabPageCalculator->Padding = System::Windows::Forms::Padding(3);
-			this->tabPageCalculator->Size = System::Drawing::Size(427, 536);
+			this->tabPageCalculator->Size = System::Drawing::Size(428, 550);
 			this->tabPageCalculator->TabIndex = 0;
 			this->tabPageCalculator->Text = L"Calculator";
 			// 
@@ -620,13 +695,205 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			// tabPageConversions
 			// 
 			this->tabPageConversions->BackColor = System::Drawing::Color::PowderBlue;
+			this->tabPageConversions->Controls->Add(this->tabControlBaseConversions);
 			this->tabPageConversions->Controls->Add(this->tabControlConversions);
 			this->tabPageConversions->Location = System::Drawing::Point(4, 28);
 			this->tabPageConversions->Name = L"tabPageConversions";
 			this->tabPageConversions->Padding = System::Windows::Forms::Padding(3);
-			this->tabPageConversions->Size = System::Drawing::Size(427, 490);
+			this->tabPageConversions->Size = System::Drawing::Size(428, 550);
 			this->tabPageConversions->TabIndex = 1;
 			this->tabPageConversions->Text = L"Conversions";
+			// 
+			// tabControlBaseConversions
+			// 
+			this->tabControlBaseConversions->Controls->Add(this->tabPageDecimal);
+			this->tabControlBaseConversions->Controls->Add(this->tabPageBinary);
+			this->tabControlBaseConversions->Controls->Add(this->tabPageHex);
+			this->tabControlBaseConversions->Location = System::Drawing::Point(7, 335);
+			this->tabControlBaseConversions->Name = L"tabControlBaseConversions";
+			this->tabControlBaseConversions->SelectedIndex = 0;
+			this->tabControlBaseConversions->Size = System::Drawing::Size(415, 195);
+			this->tabControlBaseConversions->TabIndex = 1;
+			// 
+			// tabPageDecimal
+			// 
+			this->tabPageDecimal->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(174)), static_cast<System::Int32>(static_cast<System::Byte>(230)),
+				static_cast<System::Int32>(static_cast<System::Byte>(203)));
+			this->tabPageDecimal->Controls->Add(this->buttonConvertDecimal);
+			this->tabPageDecimal->Controls->Add(this->comboBoxDecimalConversion);
+			this->tabPageDecimal->Controls->Add(this->textBoxDecimalConverted);
+			this->tabPageDecimal->Controls->Add(this->textBoxDecimal);
+			this->tabPageDecimal->Controls->Add(this->lblConvertedDecimal);
+			this->tabPageDecimal->Controls->Add(this->lblDecimal);
+			this->tabPageDecimal->Location = System::Drawing::Point(4, 28);
+			this->tabPageDecimal->Name = L"tabPageDecimal";
+			this->tabPageDecimal->Padding = System::Windows::Forms::Padding(3);
+			this->tabPageDecimal->Size = System::Drawing::Size(407, 163);
+			this->tabPageDecimal->TabIndex = 0;
+			this->tabPageDecimal->Text = L"Decimal";
+			// 
+			// buttonConvertDecimal
+			// 
+			this->buttonConvertDecimal->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(147)),
+				static_cast<System::Int32>(static_cast<System::Byte>(194)), static_cast<System::Int32>(static_cast<System::Byte>(171)));
+			this->buttonConvertDecimal->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->buttonConvertDecimal->Font = (gcnew System::Drawing::Font(L"Calibri Light", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->buttonConvertDecimal->Location = System::Drawing::Point(214, 66);
+			this->buttonConvertDecimal->Name = L"buttonConvertDecimal";
+			this->buttonConvertDecimal->Size = System::Drawing::Size(91, 27);
+			this->buttonConvertDecimal->TabIndex = 18;
+			this->buttonConvertDecimal->Text = L"Convert";
+			this->buttonConvertDecimal->UseVisualStyleBackColor = false;
+			// 
+			// comboBoxDecimalConversion
+			// 
+			this->comboBoxDecimalConversion->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->comboBoxDecimalConversion->ImeMode = System::Windows::Forms::ImeMode::NoControl;
+			this->comboBoxDecimalConversion->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Binary (Base 2)", L"Hexadecimal (Base 16)" });
+			this->comboBoxDecimalConversion->Location = System::Drawing::Point(7, 66);
+			this->comboBoxDecimalConversion->MaxDropDownItems = 2;
+			this->comboBoxDecimalConversion->Name = L"comboBoxDecimalConversion";
+			this->comboBoxDecimalConversion->Size = System::Drawing::Size(190, 27);
+			this->comboBoxDecimalConversion->TabIndex = 0;
+			// 
+			// textBoxDecimalConverted
+			// 
+			this->textBoxDecimalConverted->BackColor = System::Drawing::SystemColors::ControlLight;
+			this->textBoxDecimalConverted->Enabled = false;
+			this->textBoxDecimalConverted->Location = System::Drawing::Point(172, 122);
+			this->textBoxDecimalConverted->Name = L"textBoxDecimalConverted";
+			this->textBoxDecimalConverted->Size = System::Drawing::Size(228, 27);
+			this->textBoxDecimalConverted->TabIndex = 16;
+			// 
+			// textBoxDecimal
+			// 
+			this->textBoxDecimal->BackColor = System::Drawing::SystemColors::ControlLight;
+			this->textBoxDecimal->Location = System::Drawing::Point(172, 9);
+			this->textBoxDecimal->Name = L"textBoxDecimal";
+			this->textBoxDecimal->Size = System::Drawing::Size(228, 27);
+			this->textBoxDecimal->TabIndex = 14;
+			// 
+			// lblConvertedDecimal
+			// 
+			this->lblConvertedDecimal->AutoSize = true;
+			this->lblConvertedDecimal->Location = System::Drawing::Point(3, 125);
+			this->lblConvertedDecimal->Name = L"lblConvertedDecimal";
+			this->lblConvertedDecimal->Size = System::Drawing::Size(80, 19);
+			this->lblConvertedDecimal->TabIndex = 15;
+			this->lblConvertedDecimal->Text = L"Converted:";
+			// 
+			// lblDecimal
+			// 
+			this->lblDecimal->AutoSize = true;
+			this->lblDecimal->Location = System::Drawing::Point(3, 12);
+			this->lblDecimal->Name = L"lblDecimal";
+			this->lblDecimal->Size = System::Drawing::Size(132, 19);
+			this->lblDecimal->TabIndex = 13;
+			this->lblDecimal->Text = L"Decimal (Base 10):";
+			// 
+			// tabPageBinary
+			// 
+			this->tabPageBinary->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(174)), static_cast<System::Int32>(static_cast<System::Byte>(230)),
+				static_cast<System::Int32>(static_cast<System::Byte>(203)));
+			this->tabPageBinary->Controls->Add(this->buttonConvertBinary);
+			this->tabPageBinary->Controls->Add(this->comboBoxBinaryConversions);
+			this->tabPageBinary->Controls->Add(this->textBoxBinaryConverted);
+			this->tabPageBinary->Controls->Add(this->textBoxBinary);
+			this->tabPageBinary->Controls->Add(this->lblBinaryConverted);
+			this->tabPageBinary->Controls->Add(this->lblBinary);
+			this->tabPageBinary->Location = System::Drawing::Point(4, 28);
+			this->tabPageBinary->Name = L"tabPageBinary";
+			this->tabPageBinary->Padding = System::Windows::Forms::Padding(3);
+			this->tabPageBinary->Size = System::Drawing::Size(407, 163);
+			this->tabPageBinary->TabIndex = 1;
+			this->tabPageBinary->Text = L"Binary";
+			// 
+			// textBoxBinaryConverted
+			// 
+			this->textBoxBinaryConverted->BackColor = System::Drawing::SystemColors::ControlLight;
+			this->textBoxBinaryConverted->Enabled = false;
+			this->textBoxBinaryConverted->Location = System::Drawing::Point(172, 122);
+			this->textBoxBinaryConverted->Name = L"textBoxBinaryConverted";
+			this->textBoxBinaryConverted->Size = System::Drawing::Size(228, 27);
+			this->textBoxBinaryConverted->TabIndex = 16;
+			// 
+			// textBoxBinary
+			// 
+			this->textBoxBinary->BackColor = System::Drawing::SystemColors::ControlLight;
+			this->textBoxBinary->Location = System::Drawing::Point(172, 9);
+			this->textBoxBinary->Name = L"textBoxBinary";
+			this->textBoxBinary->Size = System::Drawing::Size(228, 27);
+			this->textBoxBinary->TabIndex = 14;
+			// 
+			// lblBinaryConverted
+			// 
+			this->lblBinaryConverted->AutoSize = true;
+			this->lblBinaryConverted->Location = System::Drawing::Point(3, 125);
+			this->lblBinaryConverted->Name = L"lblBinaryConverted";
+			this->lblBinaryConverted->Size = System::Drawing::Size(80, 19);
+			this->lblBinaryConverted->TabIndex = 15;
+			this->lblBinaryConverted->Text = L"Converted:";
+			// 
+			// lblBinary
+			// 
+			this->lblBinary->AutoSize = true;
+			this->lblBinary->Location = System::Drawing::Point(3, 12);
+			this->lblBinary->Name = L"lblBinary";
+			this->lblBinary->Size = System::Drawing::Size(112, 19);
+			this->lblBinary->TabIndex = 13;
+			this->lblBinary->Text = L"Binary (Base 2):";
+			// 
+			// tabPageHex
+			// 
+			this->tabPageHex->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(174)), static_cast<System::Int32>(static_cast<System::Byte>(230)),
+				static_cast<System::Int32>(static_cast<System::Byte>(203)));
+			this->tabPageHex->Controls->Add(this->buttonConvertHex);
+			this->tabPageHex->Controls->Add(this->comboBoxHexConversions);
+			this->tabPageHex->Controls->Add(this->textBoxConvertedHex);
+			this->tabPageHex->Controls->Add(this->textBoxHex);
+			this->tabPageHex->Controls->Add(this->lblConvertedHex);
+			this->tabPageHex->Controls->Add(this->lblHex);
+			this->tabPageHex->Location = System::Drawing::Point(4, 28);
+			this->tabPageHex->Name = L"tabPageHex";
+			this->tabPageHex->Size = System::Drawing::Size(407, 163);
+			this->tabPageHex->TabIndex = 2;
+			this->tabPageHex->Text = L"Hexadecimal";
+			// 
+			// textBoxConvertedHex
+			// 
+			this->textBoxConvertedHex->BackColor = System::Drawing::SystemColors::ControlLight;
+			this->textBoxConvertedHex->Enabled = false;
+			this->textBoxConvertedHex->Location = System::Drawing::Point(172, 122);
+			this->textBoxConvertedHex->Name = L"textBoxConvertedHex";
+			this->textBoxConvertedHex->Size = System::Drawing::Size(228, 27);
+			this->textBoxConvertedHex->TabIndex = 12;
+			// 
+			// textBoxHex
+			// 
+			this->textBoxHex->BackColor = System::Drawing::SystemColors::ControlLight;
+			this->textBoxHex->Location = System::Drawing::Point(172, 9);
+			this->textBoxHex->Name = L"textBoxHex";
+			this->textBoxHex->Size = System::Drawing::Size(228, 27);
+			this->textBoxHex->TabIndex = 10;
+			// 
+			// lblConvertedHex
+			// 
+			this->lblConvertedHex->AutoSize = true;
+			this->lblConvertedHex->Location = System::Drawing::Point(3, 125);
+			this->lblConvertedHex->Name = L"lblConvertedHex";
+			this->lblConvertedHex->Size = System::Drawing::Size(80, 19);
+			this->lblConvertedHex->TabIndex = 11;
+			this->lblConvertedHex->Text = L"Converted:";
+			// 
+			// lblHex
+			// 
+			this->lblHex->AutoSize = true;
+			this->lblHex->Location = System::Drawing::Point(3, 12);
+			this->lblHex->Name = L"lblHex";
+			this->lblHex->Size = System::Drawing::Size(163, 19);
+			this->lblHex->TabIndex = 9;
+			this->lblHex->Text = L"Hexadecimal (Base 16):";
 			// 
 			// tabControlConversions
 			// 
@@ -636,10 +903,10 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			this->tabControlConversions->Controls->Add(this->tabPageSpeed);
 			this->tabControlConversions->Controls->Add(this->tabPageTemperature);
 			this->tabControlConversions->Controls->Add(this->tabPageAngles);
-			this->tabControlConversions->Location = System::Drawing::Point(6, 78);
+			this->tabControlConversions->Location = System::Drawing::Point(6, 18);
 			this->tabControlConversions->Name = L"tabControlConversions";
 			this->tabControlConversions->SelectedIndex = 0;
-			this->tabControlConversions->Size = System::Drawing::Size(415, 315);
+			this->tabControlConversions->Size = System::Drawing::Size(415, 283);
 			this->tabControlConversions->TabIndex = 0;
 			// 
 			// tabPageLength
@@ -655,7 +922,7 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			this->tabPageLength->Location = System::Drawing::Point(4, 28);
 			this->tabPageLength->Name = L"tabPageLength";
 			this->tabPageLength->Padding = System::Windows::Forms::Padding(3);
-			this->tabPageLength->Size = System::Drawing::Size(407, 283);
+			this->tabPageLength->Size = System::Drawing::Size(407, 251);
 			this->tabPageLength->TabIndex = 0;
 			this->tabPageLength->Text = L"Length";
 			// 
@@ -671,7 +938,7 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			});
 			this->listBoxLengthTo->Location = System::Drawing::Point(215, 39);
 			this->listBoxLengthTo->Name = L"listBoxLengthTo";
-			this->listBoxLengthTo->Size = System::Drawing::Size(186, 232);
+			this->listBoxLengthTo->Size = System::Drawing::Size(186, 194);
 			this->listBoxLengthTo->TabIndex = 6;
 			// 
 			// listBoxLengthFrom
@@ -686,7 +953,7 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			});
 			this->listBoxLengthFrom->Location = System::Drawing::Point(8, 39);
 			this->listBoxLengthFrom->Name = L"listBoxLengthFrom";
-			this->listBoxLengthFrom->Size = System::Drawing::Size(190, 232);
+			this->listBoxLengthFrom->Size = System::Drawing::Size(190, 194);
 			this->listBoxLengthFrom->TabIndex = 5;
 			// 
 			// textBoxLengthTo
@@ -738,7 +1005,7 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			this->tabPageWeight->Location = System::Drawing::Point(4, 28);
 			this->tabPageWeight->Name = L"tabPageWeight";
 			this->tabPageWeight->Padding = System::Windows::Forms::Padding(3);
-			this->tabPageWeight->Size = System::Drawing::Size(407, 283);
+			this->tabPageWeight->Size = System::Drawing::Size(407, 251);
 			this->tabPageWeight->TabIndex = 1;
 			this->tabPageWeight->Text = L"Weight";
 			// 
@@ -754,7 +1021,7 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			});
 			this->listBoxWeightTo->Location = System::Drawing::Point(215, 39);
 			this->listBoxWeightTo->Name = L"listBoxWeightTo";
-			this->listBoxWeightTo->Size = System::Drawing::Size(186, 232);
+			this->listBoxWeightTo->Size = System::Drawing::Size(186, 194);
 			this->listBoxWeightTo->TabIndex = 6;
 			// 
 			// listBoxWeightFrom
@@ -769,7 +1036,7 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			});
 			this->listBoxWeightFrom->Location = System::Drawing::Point(8, 39);
 			this->listBoxWeightFrom->Name = L"listBoxWeightFrom";
-			this->listBoxWeightFrom->Size = System::Drawing::Size(190, 232);
+			this->listBoxWeightFrom->Size = System::Drawing::Size(190, 194);
 			this->listBoxWeightFrom->TabIndex = 6;
 			// 
 			// textBoxWeightTo
@@ -820,7 +1087,7 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			this->tabPageVolume->Controls->Add(this->label3);
 			this->tabPageVolume->Location = System::Drawing::Point(4, 28);
 			this->tabPageVolume->Name = L"tabPageVolume";
-			this->tabPageVolume->Size = System::Drawing::Size(407, 283);
+			this->tabPageVolume->Size = System::Drawing::Size(407, 251);
 			this->tabPageVolume->TabIndex = 2;
 			this->tabPageVolume->Text = L"Volume";
 			// 
@@ -836,7 +1103,7 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			});
 			this->listBoxVolumeTo->Location = System::Drawing::Point(215, 39);
 			this->listBoxVolumeTo->Name = L"listBoxVolumeTo";
-			this->listBoxVolumeTo->Size = System::Drawing::Size(186, 232);
+			this->listBoxVolumeTo->Size = System::Drawing::Size(186, 194);
 			this->listBoxVolumeTo->TabIndex = 7;
 			// 
 			// listBoxVolumeFrom
@@ -851,7 +1118,7 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			});
 			this->listBoxVolumeFrom->Location = System::Drawing::Point(8, 39);
 			this->listBoxVolumeFrom->Name = L"listBoxVolumeFrom";
-			this->listBoxVolumeFrom->Size = System::Drawing::Size(190, 232);
+			this->listBoxVolumeFrom->Size = System::Drawing::Size(190, 194);
 			this->listBoxVolumeFrom->TabIndex = 7;
 			// 
 			// textBoxVolumeTo
@@ -902,7 +1169,7 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			this->tabPageSpeed->Controls->Add(this->label5);
 			this->tabPageSpeed->Location = System::Drawing::Point(4, 28);
 			this->tabPageSpeed->Name = L"tabPageSpeed";
-			this->tabPageSpeed->Size = System::Drawing::Size(407, 283);
+			this->tabPageSpeed->Size = System::Drawing::Size(407, 251);
 			this->tabPageSpeed->TabIndex = 3;
 			this->tabPageSpeed->Text = L"Speed";
 			// 
@@ -915,7 +1182,7 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			this->listBoxSpeedTo->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Mile per Hour", L"Kilometre per Hour" });
 			this->listBoxSpeedTo->Location = System::Drawing::Point(215, 39);
 			this->listBoxSpeedTo->Name = L"listBoxSpeedTo";
-			this->listBoxSpeedTo->Size = System::Drawing::Size(186, 232);
+			this->listBoxSpeedTo->Size = System::Drawing::Size(186, 194);
 			this->listBoxSpeedTo->TabIndex = 13;
 			// 
 			// listBoxSpeedFrom
@@ -927,7 +1194,7 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			this->listBoxSpeedFrom->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Mile per Hour", L"Kilometre per Hour" });
 			this->listBoxSpeedFrom->Location = System::Drawing::Point(8, 39);
 			this->listBoxSpeedFrom->Name = L"listBoxSpeedFrom";
-			this->listBoxSpeedFrom->Size = System::Drawing::Size(190, 232);
+			this->listBoxSpeedFrom->Size = System::Drawing::Size(190, 194);
 			this->listBoxSpeedFrom->TabIndex = 7;
 			// 
 			// textBoxSpeedTo
@@ -978,7 +1245,7 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			this->tabPageTemperature->Controls->Add(this->label7);
 			this->tabPageTemperature->Location = System::Drawing::Point(4, 28);
 			this->tabPageTemperature->Name = L"tabPageTemperature";
-			this->tabPageTemperature->Size = System::Drawing::Size(407, 283);
+			this->tabPageTemperature->Size = System::Drawing::Size(407, 251);
 			this->tabPageTemperature->TabIndex = 4;
 			this->tabPageTemperature->Text = L"Temperature";
 			// 
@@ -991,7 +1258,7 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			this->listBoxTempTo->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"Celcius", L"Fahrenheit", L"Kelvin" });
 			this->listBoxTempTo->Location = System::Drawing::Point(215, 39);
 			this->listBoxTempTo->Name = L"listBoxTempTo";
-			this->listBoxTempTo->Size = System::Drawing::Size(186, 232);
+			this->listBoxTempTo->Size = System::Drawing::Size(186, 194);
 			this->listBoxTempTo->TabIndex = 7;
 			// 
 			// listBoxTempFrom
@@ -1003,7 +1270,7 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			this->listBoxTempFrom->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"Celcius", L"Fahrenheit", L"Kelvin" });
 			this->listBoxTempFrom->Location = System::Drawing::Point(8, 39);
 			this->listBoxTempFrom->Name = L"listBoxTempFrom";
-			this->listBoxTempFrom->Size = System::Drawing::Size(190, 232);
+			this->listBoxTempFrom->Size = System::Drawing::Size(190, 194);
 			this->listBoxTempFrom->TabIndex = 7;
 			// 
 			// textBoxTempTo
@@ -1054,7 +1321,7 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			this->tabPageAngles->Controls->Add(this->label9);
 			this->tabPageAngles->Location = System::Drawing::Point(4, 28);
 			this->tabPageAngles->Name = L"tabPageAngles";
-			this->tabPageAngles->Size = System::Drawing::Size(407, 283);
+			this->tabPageAngles->Size = System::Drawing::Size(407, 251);
 			this->tabPageAngles->TabIndex = 5;
 			this->tabPageAngles->Text = L"Angles";
 			// 
@@ -1067,7 +1334,7 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			this->listBoxMathsTo->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Degrees", L"Radians" });
 			this->listBoxMathsTo->Location = System::Drawing::Point(215, 39);
 			this->listBoxMathsTo->Name = L"listBoxMathsTo";
-			this->listBoxMathsTo->Size = System::Drawing::Size(186, 232);
+			this->listBoxMathsTo->Size = System::Drawing::Size(186, 194);
 			this->listBoxMathsTo->TabIndex = 7;
 			// 
 			// listBoxMathsFrom
@@ -1079,7 +1346,7 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			this->listBoxMathsFrom->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Degrees", L"Radians" });
 			this->listBoxMathsFrom->Location = System::Drawing::Point(8, 39);
 			this->listBoxMathsFrom->Name = L"listBoxMathsFrom";
-			this->listBoxMathsFrom->Size = System::Drawing::Size(190, 232);
+			this->listBoxMathsFrom->Size = System::Drawing::Size(190, 194);
 			this->listBoxMathsFrom->TabIndex = 7;
 			// 
 			// textBoxMathsTo
@@ -1118,13 +1385,61 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			this->label9->TabIndex = 9;
 			this->label9->Text = L"From:";
 			// 
+			// buttonConvertBinary
+			// 
+			this->buttonConvertBinary->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(147)),
+				static_cast<System::Int32>(static_cast<System::Byte>(194)), static_cast<System::Int32>(static_cast<System::Byte>(171)));
+			this->buttonConvertBinary->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->buttonConvertBinary->Font = (gcnew System::Drawing::Font(L"Calibri Light", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->buttonConvertBinary->Location = System::Drawing::Point(214, 66);
+			this->buttonConvertBinary->Name = L"buttonConvertBinary";
+			this->buttonConvertBinary->Size = System::Drawing::Size(91, 27);
+			this->buttonConvertBinary->TabIndex = 20;
+			this->buttonConvertBinary->Text = L"Convert";
+			this->buttonConvertBinary->UseVisualStyleBackColor = false;
+			// 
+			// comboBoxBinaryConversions
+			// 
+			this->comboBoxBinaryConversions->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->comboBoxBinaryConversions->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Decimal (Base 10)", L"Hexadecimal (Base 16)" });
+			this->comboBoxBinaryConversions->Location = System::Drawing::Point(7, 66);
+			this->comboBoxBinaryConversions->MaxDropDownItems = 2;
+			this->comboBoxBinaryConversions->Name = L"comboBoxBinaryConversions";
+			this->comboBoxBinaryConversions->Size = System::Drawing::Size(190, 27);
+			this->comboBoxBinaryConversions->TabIndex = 19;
+			// 
+			// buttonConvertHex
+			// 
+			this->buttonConvertHex->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(147)),
+				static_cast<System::Int32>(static_cast<System::Byte>(194)), static_cast<System::Int32>(static_cast<System::Byte>(171)));
+			this->buttonConvertHex->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->buttonConvertHex->Font = (gcnew System::Drawing::Font(L"Calibri Light", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->buttonConvertHex->Location = System::Drawing::Point(214, 66);
+			this->buttonConvertHex->Name = L"buttonConvertHex";
+			this->buttonConvertHex->Size = System::Drawing::Size(91, 27);
+			this->buttonConvertHex->TabIndex = 20;
+			this->buttonConvertHex->Text = L"Convert";
+			this->buttonConvertHex->UseVisualStyleBackColor = false;
+			// 
+			// comboBoxHexConversions
+			// 
+			this->comboBoxHexConversions->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->comboBoxHexConversions->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Decimal (Base 10)", L"Binary (Base 2)" });
+			this->comboBoxHexConversions->Location = System::Drawing::Point(7, 66);
+			this->comboBoxHexConversions->MaxDropDownItems = 2;
+			this->comboBoxHexConversions->Name = L"comboBoxHexConversions";
+			this->comboBoxHexConversions->Size = System::Drawing::Size(190, 27);
+			this->comboBoxHexConversions->TabIndex = 19;
+			// 
 			// Calculator
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(222)),
 				static_cast<System::Int32>(static_cast<System::Byte>(251)));
-			this->ClientSize = System::Drawing::Size(460, 593);
+			this->ClientSize = System::Drawing::Size(460, 606);
 			this->Controls->Add(this->tabControlApp);
 			this->Font = (gcnew System::Drawing::Font(L"Calibri Light", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
@@ -1134,6 +1449,13 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			this->tabControlApp->ResumeLayout(false);
 			this->tabPageCalculator->ResumeLayout(false);
 			this->tabPageConversions->ResumeLayout(false);
+			this->tabControlBaseConversions->ResumeLayout(false);
+			this->tabPageDecimal->ResumeLayout(false);
+			this->tabPageDecimal->PerformLayout();
+			this->tabPageBinary->ResumeLayout(false);
+			this->tabPageBinary->PerformLayout();
+			this->tabPageHex->ResumeLayout(false);
+			this->tabPageHex->PerformLayout();
 			this->tabControlConversions->ResumeLayout(false);
 			this->tabPageLength->ResumeLayout(false);
 			this->tabPageLength->PerformLayout();

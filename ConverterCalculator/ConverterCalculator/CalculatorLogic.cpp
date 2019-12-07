@@ -65,8 +65,10 @@ std::string CalculatorLogic::inToPost(std::string expression)
 			{
 				if (sqrRoot)
 				{
+					// Evaluate square root number
 					int sqrDigit = std::stoi(digit);
 
+					// Add result to infix stack
 					infixStackTemp.push(Token(std::to_string(sqrt(sqrDigit)), TOKENTYPE_OPERAND));
 					sqrRoot = false;
 				}
@@ -139,6 +141,7 @@ std::string CalculatorLogic::inToPost(std::string expression)
 
 			if (token.type == TOKENTYPE_OPERATOR)
 			{
+				// If there are operators with higher precedence at the top of stack, push the current operator to the postfix stack
 				while (!stackTemp.empty() && stackTemp.top().value != "(" && hasHigherPrecedence(stackTemp.top().value, token.value))
 				{
 					postfixStackTemp.push(stackTemp.top());
@@ -147,6 +150,7 @@ std::string CalculatorLogic::inToPost(std::string expression)
 				stackTemp.push(token);
 			}
 
+			// Add operands straight to the postfix stack
 			else if (token.type == TOKENTYPE_OPERAND)
 				postfixStackTemp.push(token);
 
@@ -155,6 +159,7 @@ std::string CalculatorLogic::inToPost(std::string expression)
 
 			else if (token.value == ")")
 			{
+				// Push operators onto the stack until it finds "("
 				while (!stackTemp.empty() && stackTemp.top().value != "(")
 				{
 					postfixStackTemp.push(stackTemp.top());
@@ -165,6 +170,7 @@ std::string CalculatorLogic::inToPost(std::string expression)
 
 		}
 
+		// Move everthing in the stack to the postfix stack
 		while (stackTemp.top().value != "#")
 		{
 			postfixStackTemp.push(stackTemp.top());
