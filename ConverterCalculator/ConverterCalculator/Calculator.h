@@ -247,6 +247,7 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			this->tabPageConversions = (gcnew System::Windows::Forms::TabPage());
 			this->tabControlBaseConversions = (gcnew System::Windows::Forms::TabControl());
 			this->tabPageDecimal = (gcnew System::Windows::Forms::TabPage());
+			this->lblDecimalConversion = (gcnew System::Windows::Forms::Label());
 			this->buttonConvertDecimal = (gcnew System::Windows::Forms::Button());
 			this->comboBoxDecimalConversion = (gcnew System::Windows::Forms::ComboBox());
 			this->textBoxDecimalConverted = (gcnew System::Windows::Forms::TextBox());
@@ -254,6 +255,7 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			this->lblConvertedDecimal = (gcnew System::Windows::Forms::Label());
 			this->lblDecimal = (gcnew System::Windows::Forms::Label());
 			this->tabPageBinary = (gcnew System::Windows::Forms::TabPage());
+			this->lblBinaryConversion = (gcnew System::Windows::Forms::Label());
 			this->buttonConvertBinary = (gcnew System::Windows::Forms::Button());
 			this->comboBoxBinaryConversions = (gcnew System::Windows::Forms::ComboBox());
 			this->textBoxBinaryConverted = (gcnew System::Windows::Forms::TextBox());
@@ -261,6 +263,7 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			this->lblBinaryConverted = (gcnew System::Windows::Forms::Label());
 			this->lblBinary = (gcnew System::Windows::Forms::Label());
 			this->tabPageHex = (gcnew System::Windows::Forms::TabPage());
+			this->lblHexConversions = (gcnew System::Windows::Forms::Label());
 			this->buttonConvertHex = (gcnew System::Windows::Forms::Button());
 			this->comboBoxHexConversions = (gcnew System::Windows::Forms::ComboBox());
 			this->textBoxHexConverted = (gcnew System::Windows::Forms::TextBox());
@@ -310,9 +313,6 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			this->textBoxMathsFrom = (gcnew System::Windows::Forms::TextBox());
 			this->label10 = (gcnew System::Windows::Forms::Label());
 			this->label9 = (gcnew System::Windows::Forms::Label());
-			this->lblBinaryConversion = (gcnew System::Windows::Forms::Label());
-			this->lblHexConversions = (gcnew System::Windows::Forms::Label());
-			this->lblDecimalConversion = (gcnew System::Windows::Forms::Label());
 			this->tabControlApp->SuspendLayout();
 			this->tabPageCalculator->SuspendLayout();
 			this->tabPageConversions->SuspendLayout();
@@ -740,6 +740,15 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			this->tabPageDecimal->TabIndex = 0;
 			this->tabPageDecimal->Text = L"Decimal";
 			// 
+			// lblDecimalConversion
+			// 
+			this->lblDecimalConversion->AutoSize = true;
+			this->lblDecimalConversion->Location = System::Drawing::Point(9, 125);
+			this->lblDecimalConversion->Name = L"lblDecimalConversion";
+			this->lblDecimalConversion->Size = System::Drawing::Size(85, 19);
+			this->lblDecimalConversion->TabIndex = 22;
+			this->lblDecimalConversion->Text = L"Conversion:";
+			// 
 			// buttonConvertDecimal
 			// 
 			this->buttonConvertDecimal->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(147)),
@@ -753,6 +762,7 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			this->buttonConvertDecimal->TabIndex = 18;
 			this->buttonConvertDecimal->Text = L"Convert";
 			this->buttonConvertDecimal->UseVisualStyleBackColor = false;
+			this->buttonConvertDecimal->Click += gcnew System::EventHandler(this, &Calculator::ButtonConvertDecimal_Click);
 			// 
 			// comboBoxDecimalConversion
 			// 
@@ -816,6 +826,15 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			this->tabPageBinary->Size = System::Drawing::Size(407, 163);
 			this->tabPageBinary->TabIndex = 1;
 			this->tabPageBinary->Text = L"Binary";
+			// 
+			// lblBinaryConversion
+			// 
+			this->lblBinaryConversion->AutoSize = true;
+			this->lblBinaryConversion->Location = System::Drawing::Point(9, 125);
+			this->lblBinaryConversion->Name = L"lblBinaryConversion";
+			this->lblBinaryConversion->Size = System::Drawing::Size(85, 19);
+			this->lblBinaryConversion->TabIndex = 21;
+			this->lblBinaryConversion->Text = L"Conversion:";
 			// 
 			// buttonConvertBinary
 			// 
@@ -892,6 +911,15 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			this->tabPageHex->Size = System::Drawing::Size(407, 163);
 			this->tabPageHex->TabIndex = 2;
 			this->tabPageHex->Text = L"Hexadecimal";
+			// 
+			// lblHexConversions
+			// 
+			this->lblHexConversions->AutoSize = true;
+			this->lblHexConversions->Location = System::Drawing::Point(9, 125);
+			this->lblHexConversions->Name = L"lblHexConversions";
+			this->lblHexConversions->Size = System::Drawing::Size(85, 19);
+			this->lblHexConversions->TabIndex = 22;
+			this->lblHexConversions->Text = L"Conversion:";
 			// 
 			// buttonConvertHex
 			// 
@@ -1441,33 +1469,6 @@ private: System::Windows::Forms::TextBox^ textBoxMathsFrom;
 			this->label9->Size = System::Drawing::Size(47, 19);
 			this->label9->TabIndex = 9;
 			this->label9->Text = L"From:";
-			// 
-			// lblBinaryConversion
-			// 
-			this->lblBinaryConversion->AutoSize = true;
-			this->lblBinaryConversion->Location = System::Drawing::Point(9, 125);
-			this->lblBinaryConversion->Name = L"lblBinaryConversion";
-			this->lblBinaryConversion->Size = System::Drawing::Size(85, 19);
-			this->lblBinaryConversion->TabIndex = 21;
-			this->lblBinaryConversion->Text = L"Conversion:";
-			// 
-			// lblHexConversions
-			// 
-			this->lblHexConversions->AutoSize = true;
-			this->lblHexConversions->Location = System::Drawing::Point(9, 125);
-			this->lblHexConversions->Name = L"lblHexConversions";
-			this->lblHexConversions->Size = System::Drawing::Size(85, 19);
-			this->lblHexConversions->TabIndex = 22;
-			this->lblHexConversions->Text = L"Conversion:";
-			// 
-			// lblDecimalConversion
-			// 
-			this->lblDecimalConversion->AutoSize = true;
-			this->lblDecimalConversion->Location = System::Drawing::Point(9, 125);
-			this->lblDecimalConversion->Name = L"lblDecimalConversion";
-			this->lblDecimalConversion->Size = System::Drawing::Size(85, 19);
-			this->lblDecimalConversion->TabIndex = 22;
-			this->lblDecimalConversion->Text = L"Conversion:";
 			// 
 			// Calculator
 			// 

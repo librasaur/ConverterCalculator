@@ -214,6 +214,7 @@ void Calculator::btnEquals_Click(System::Object^ sender, System::EventArgs^ e)
 	lblOutput->Text = gcnew String(result.c_str());
 
 	decimalJustAdded = false;
+	operatorJustAdded = false;
 }
 
 
@@ -382,7 +383,7 @@ void Calculator::ButtonConvertDecimal_Click(System::Object^ sender, System::Even
 
 	// Get convert
 	String^ convertTo = comboBoxDecimalConversion->Text;
-	lblBinaryConversion->Text = convertTo + ":";
+	lblDecimalConversion->Text = convertTo + ":";
 
 	// Do conversion
 	if (convertTo == "Binary (Base 2)")

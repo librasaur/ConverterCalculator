@@ -395,7 +395,7 @@ std::string ConversionLogic::convertValueVolume(std::string value, std::string c
 			result = value;
 
 		else if (convertTo == "Cubic Centimetre")
-			result = std::to_string(std::stof(value) / 568.261);
+			result = std::to_string(std::stof(value) * 1000000);
 	}
 
 	else if (convertFrom == "Cubic Centimetre")
